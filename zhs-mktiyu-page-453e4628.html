@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mk体育 · 信息卡片</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: #0f172a;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            color: #e2e8f0;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            color: #f8fafc;
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: 0 auto 1rem;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            letter-spacing: 0.02em;
+            margin-top: 0.5rem;
+        }
+
+        /* 浅色正文区 */
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #2563eb;
+            padding-left: 1rem;
+            color: #0f172a;
+        }
+
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf2;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .card .emoji {
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .card p {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        /* 适合人群段落 */
+        .audience-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem 2rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf2;
+            margin-bottom: 2.5rem;
+        }
+
+        .audience-section p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #334155;
+        }
+
+        .audience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .audience-tags span {
+            background: #eef2ff;
+            color: #1e40af;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #c7d2fe;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #e9edf2;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .link-paragraph p {
+            margin-bottom: 0.8rem;
+            color: #334155;
+        }
+
+        .link-paragraph a {
+            color: #2563eb;
+            text-decoration: underline;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 3px;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .link-paragraph a:hover {
+            color: #1d4ed8;
+            text-decoration-thickness: 2px;
+        }
+
+        .faq-mini {
+            margin-top: 2rem;
+        }
+
+        .faq-mini h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #0f172a;
+        }
+
+        .faq-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e9edf2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item .a {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .faq-item .a a {
+            color: #2563eb;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem 2rem;
+            }
+
+            .content {
+                padding: 1.5rem 1rem 3rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .audience-section,
+            .link-paragraph {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 -->
+    <header class="hero">
+        <h1>mk体育 · 日常信息卡片</h1>
+        <p>在赛季中间、训练前后，用清晰对照的方式查阅体育内容。把碎片信息整理成可参考的笔记。</p>
+        <span class="badge">信息卡片 · 生活化视角</span>
+    </header>
+
+    <!-- 浅色正文区 -->
+    <main class="content">
+
+        <!-- 用途卡片 -->
+        <h2 class="section-title">📋 日常可以怎么用</h2>
+        <div class="card-grid">
+            <div class="card">
+                <div class="emoji">📖</div>
+                <h3>快速对照</h3>
+                <p>赛季数据、赛事阶段、队伍动态，需要横向比较时直接展开卡片——不用反复切换页面。</p>
+            </div>
+            <div class="card">
+                <div class="emoji">🔍</div>
+                <h3>延伸阅读</h3>
+                <p>一个观点或一条新闻往往会引出新的线索。顺着卡片中的关联内容继续翻看，比单纯搜索更自然。</p>
+            </div>
+            <div class="card">
+                <div class="emoji">📝</div>
+                <h3>随手记录</h3>
+                <p>看比赛时习惯记两笔？把要点写在卡片旁边，下次打开时上下文还在，不用重新回忆。</p>
+            </div>
+            <div class="card">
+                <div class="emoji">⚡</div>
+                <h3>轻量参考</h3>
+                <p>界面简洁，没有多余弹窗。查一个名词、一段背景或一支队伍的历史，几秒就能定位到。</p>
+            </div>
+        </div>
+
+        <!-- 适合人群段落 -->
+        <div class="audience-section">
+            <h2 class="section-title" style="border-left-color: #7c3aed;">👥 适合什么样的人</h2>
+            <p>如果你平时会翻看体育资讯、比赛前瞻或者赛后复盘，那么信息卡片的形式会比较合手。不用硬记网址，也不用在多个页面之间来回跳转。</p>
+            <p>对于刚接触某个运动项目的新手来说，卡片式的内容天然适合“从一个小点开始，慢慢扩展”。比如看到一支球队的简称，旁边就有对应的完整名称和近期战绩，省去二次搜索的麻烦。</p>
+            <p>偶尔想回顾某个赛季的经典比赛，或者了解某位选手的职业生涯转折点，也能在卡片之间找到自然衔接的线索。</p>
+            <div class="audience-tags">
+                <span>🏀 篮球爱好者</span>
+                <span>⚽ 足球迷</span>
+                <span>🎾 网球观众</span>
+                <span>🏐 排球关注者</span>
+                <span>📊 数据型读者</span>
+                <span>🧭 新手入门</span>
+            </div>
+        </div>
+
+        <!-- 自然链接段落 + FAQ 摘要 -->
+        <div class="link-paragraph">
+            <h2 class="section-title" style="border-left-color: #059669;">🌿 从查询到延伸</h2>
+            <p>
+                平时打开 <a href="https://zhs-mktiyu.com">mk体育</a> 的页面，就像翻开一本随时更新的参考手册。 
+                没有强推送，也没有复杂的菜单——想看什么，直接点卡片或者搜关键词就行。
+            </p>
+            <p>
+                举个例子：你正在读一篇关于欧冠淘汰赛的文章，里面提到了某支球队的客场战绩。 
+                此时旁边的卡片正好列出了该队近五个赛季的客场胜率、进球数和关键球员变化。 
+                这种对照体验，比单独开一个标签页去查数据库要流畅很多。
+            </p>
+            <p>
+                另外，如果你习惯用手机看体育内容，卡片布局在小屏上会自动调整成单列， 
+                字体大小和间距也会跟着适配，不会出现字叠在一起的情况。
+            </p>
+
+            <!-- FAQ 摘要 -->
+            <div class="faq-mini">
+                <h4>❓ 常见疑问摘要</h4>
+                <div class="faq-item">
+                    <div class="q">卡片里的数据多久更新一次？</div>
+                    <div class="a">主要数据跟随赛季节奏，常规赛阶段每日同步，休赛期则按周更新。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q">能否只看某个运动类别的内容？</div>
+                    <div class="a">可以。页面顶部提供了分类筛选，点击对应标签即可折叠其他卡片。详细用法可以参考 <a href="https://zhs-mktiyu.com">mk体育</a> 内的引导说明。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q">没有找到想要的信息怎么办？</div>
+                    <div class="a">每个卡片右下角都有一个「反馈」按钮，提交你的需求后，后续版本会考虑补充相关内容。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一句提示（自然收尾） -->
+        <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 1rem;">
+            把零散的信息整理成可翻阅的卡片，下次再看时就不必从头开始。
+        </p>
+
+    </main>
+
+</body>
+</html>
